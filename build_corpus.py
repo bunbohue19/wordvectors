@@ -16,20 +16,20 @@ lcode = args.lcode
 if lcode == 'ko':
     from konlpy.tag import Kkma # pip install konlpy. See http://konlpy.org/en/v0.4.4/ for further information.
     kkma = Kkma()
-    print "kkma succesfuly loaded!"
+    print("kkma succesfuly loaded!")
 elif lcode == 'ja':
     import MeCab # See https://pypi.python.org/pypi/mecab-python/0.996
     mecab = MeCab.Tagger("-Owakati")
-    print "mecab succesfuly loaded!"
+    print("mecab succesfuly loaded!")
 elif lcode == 'zh':
     import jieba # See https://pypi.python.org/pypi/jieba/
-    print "jieba succesfuly loaded!"
+    print("jieba succesfuly loaded!")
 elif lcode == 'vi':
-    from pyvi.pyvi import ViTokenizer # See https://pypi.python.org/pypi/pyvi
-    print "pyvi succesfuly loaded!"
+    from pyvi import ViTokenizer # See https://pypi.python.org/pypi/pyvi
+    print("pyvi succesfuly loaded!")
 elif lcode == 'th':  
     import pythai # See https://pypi.python.org/pypi/pythai  
-    print "pythai succesfuly loaded!"
+    print("pythai succesfuly loaded!")
 # elif lcode == 'ar':
 #     os.environ['CLASSPATH'] = "../stanford-segmenter-2015-12-09"
 #     from nltk.tokenize.stanford_segmenter import StanfordSegmenter
@@ -40,7 +40,7 @@ elif lcode == 'th':
 #     print "StanfordSegmenter succesfuly loaded!"
     
 max_corpus_size = args.max_corpus_size
-fname = "{}wiki-20161201-pages-articles-multistream.xml".format(lcode)    
+fname = "{}wiki-20231101-pages-articles-multistream.xml".format(lcode)    
 
 def clean_text(text):
     global lcode
@@ -156,9 +156,9 @@ def build_corpus():
             except:
                 continue # it's okay as we have a pretty big corpus!
             elem.clear() # We need to save memory!
-            if i % 1000 == 0: 
-                print i,
-                fsize = os.path.getsize("data/{}.txt".format(lcode))
+            if i % 1000 == 0:
+                fsize = os.path.getsize("data/{}.txt".format(lcode)) 
+                print(i, fsize)
                 if fsize > max_corpus_size:
                     break
             i += 1
@@ -166,4 +166,4 @@ def build_corpus():
 if __name__ == "__main__":
     build_corpus()
     
-    print "Done"
+    print("Done")
